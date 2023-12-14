@@ -12,8 +12,9 @@ public class Main {
 
         main.setVisible(true);
 
-
         main.getContentPane().add(new Menu());
+
+        SqlConnection s = new SqlConnection();
 
 
 
