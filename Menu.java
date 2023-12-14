@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class Menu extends Base{
+    Menu menu;
     public Menu(){
         super();
         menu = this;
@@ -30,7 +31,7 @@ public class Menu extends Base{
         @Override
         public void actionPerformed(ActionEvent e) {
             JFrame frame = (JFrame) SwingUtilities.windowForComponent(menu);
-            frame.setContentPane(admin);
+            frame.setContentPane(new Admin());
             frame.invalidate();
             frame.validate();
 

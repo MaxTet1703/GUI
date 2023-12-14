@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Admin extends Base{
-
+    Admin admin;
     public Admin(){
         super();
         admin = this;
@@ -30,7 +30,7 @@ public class Admin extends Base{
         @Override
         public void actionPerformed(ActionEvent e) {
             JFrame frame = (JFrame) SwingUtilities.windowForComponent(admin);
-            frame.setContentPane(menu);
+            frame.setContentPane(new Menu());
             frame.invalidate();
             frame.validate();
 

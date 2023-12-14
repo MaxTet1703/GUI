@@ -12,15 +12,8 @@ public class Main {
 
         main.setVisible(true);
 
-        Admin admin = new Admin();
-        Menu menu = new Menu();
 
-        menu.admin = admin;
-        admin.menu = menu;
-
-
-
-        main.getContentPane().add(menu);
+        main.getContentPane().add(new Menu());
 
 
 
