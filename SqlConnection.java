@@ -5,26 +5,13 @@ public class SqlConnection {
     static final String URL = "jdbc:postgresql://127.0.0.1:5432/gui";
     static final String name = "maxim";
     static final String password = "12345";
-
-    static final String firstQuery = "SELECT * FROM item";
+    Statement st;
+    Connection conn;
     public SqlConnection(){
-        Connection conn = getConnection();
-        Statement st = null;
-        try{
-            st = conn.createStatement();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        if (st != null){
-           try{
-               st.execute(firstQuery);
-           }catch (Exception e){
-               e.printStackTrace();
-           }
-        }
+
     }
     private Connection getConnection(){
-        Connection conn = null;
+        conn = null;
         try {
             conn = DriverManager.getConnection(URL, name, password);
             return conn;
@@ -34,6 +21,26 @@ public class SqlConnection {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ResultSet getData(String query){
+        ResultSet result = null;
+        try{
+            st = getConnection().createStatement();
+            result = st.executeQuery(query);
+            return result;
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void closeConnection(){
+        try{
+            conn.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 }

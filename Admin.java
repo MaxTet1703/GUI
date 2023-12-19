@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 public class Admin extends Base{
     Admin admin;
-    public Admin(){
-        super();
+    public Admin(JFrame frame){
+        super(frame);
         admin = this;
     }
 
@@ -25,12 +25,15 @@ public class Admin extends Base{
         admin_but.setBackground(Color.decode("#DC143C"));
 
     }
+
     private class SwitchToMenu implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFrame frame = (JFrame) SwingUtilities.windowForComponent(admin);
-            frame.setContentPane(new Menu());
+
+            admin.setVisible(false);
+            frame.getContentPane().removeAll();
+            frame.setContentPane(new Menu(frame));
             frame.invalidate();
             frame.validate();
 

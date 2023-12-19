@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Base extends JPanel {
-    public Base(){
+abstract class Base extends JPanel {
+    JFrame frame;
+    public Base(JFrame frame){
         this.setLayout(null);
+        this.frame = frame;
         settingNameLabel();
         settingMenuButton();
         settingAdminButton();
