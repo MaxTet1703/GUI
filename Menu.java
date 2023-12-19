@@ -22,7 +22,7 @@ public class Menu extends Base{
     @Override
     protected void settingMenuButton() {
         super.settingMenuButton();
-        menu_but.setBorder(new RoundedBorder(10));
+        menu_but.setBorder(new RoundedBorder(10, Color.decode("#FFFFFF")));
         menu_but.setForeground(Color.WHITE);
         menu_but.setBackground(Color.decode("#DC143C"));
     }
