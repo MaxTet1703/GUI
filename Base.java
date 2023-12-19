@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.ResultSet;
 
 abstract class Base extends JPanel {
     JFrame frame;
+    boolean is_login = false;
     public Base(JFrame frame){
         this.setLayout(null);
         this.frame = frame;
@@ -32,6 +34,11 @@ abstract class Base extends JPanel {
         menu_but.setBounds(250, 20, menu_size.width, menu_size.height);
         menu_but.setForeground(Color.WHITE);
 
+    }
+    protected ResultSet getData(String query){
+        SqlConnection sqlConn = new SqlConnection();
+        ResultSet rs = sqlConn.getData(query);
+        return rs;
     }
     public void paintComponent(Graphics g){
         g.setColor(Color.decode("#DC143C"));

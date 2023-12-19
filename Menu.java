@@ -34,13 +34,9 @@ public class Menu extends Base{
         admin_but.addActionListener(new SwitchToAdmin());
 
     }
-    private ResultSet getMenu(String query){
-        SqlConnection sqlConn = new SqlConnection();
-        ResultSet rs = sqlConn.getData(query);
-        return rs;
-    }
+
     private void setTextForMenu(){
-        ResultSet rs = getMenu(secondQuery);
+        ResultSet rs = getData(secondQuery);
         int x_label = 250;
         int x_description = 400;
         int y = 120;
@@ -69,7 +65,7 @@ public class Menu extends Base{
         super.paintComponent(g);
         int x_image = 20;
         int y = 120;
-        ResultSet rs = getMenu(firstQuery);
+        ResultSet rs = getData(firstQuery);
         try{
             while(rs.next()){
                 BufferedImage bufferedImage = ImageIO.read(new File(rs.getString(1)));
