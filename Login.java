@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login extends Admin{
+//    Страница входа для администратора
     JTextField name = new JTextField();
     JPasswordField password = new JPasswordField();
     JLabel label = new JLabel("Вход");
@@ -22,6 +23,7 @@ public class Login extends Admin{
     }
 
     private void SettingAdminForm(){
+//        Настройка внешнего вида формы для входа администратора в административную оболочку
         name.setBorder(new RoundedBorder(10, Color.decode("#DC143C")));
         name.setBounds(270, 180, 250, 35);
 
@@ -44,6 +46,7 @@ public class Login extends Admin{
 
     }
     private void AddAdminForm(){
+//        Дабавление компонентов формы в оболочку страницы
         this.add(label);
         this.add(name);
         this.add(password);
@@ -52,11 +55,14 @@ public class Login extends Admin{
         wrong.setVisible(false);
     }
     private void errorResponse(){
+//        Сообщение об ошибке, если не найден администратор
         wrong.setVisible(true);
     }
     private class AdminLogin implements ActionListener{
+//        Прослушка события отправления данных на бд
         @Override
         public void actionPerformed(ActionEvent e){
+//            Обработка информации с формы и проверка, есть ли администратор с полученными данными
             String name_value = name.getText();
             String password_value = password.getText();
             if (name_value.isEmpty()){

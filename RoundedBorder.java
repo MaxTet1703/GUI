@@ -2,6 +2,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class RoundedBorder implements Border {
+//    Класс, отвечающий за закругдение рамок у кнопки
     public int radius;
     public Color color;
     RoundedBorder(int radius, Color color) {

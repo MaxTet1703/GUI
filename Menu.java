@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Menu extends Base{
+//    Класс, отвечающий за создание страницы со списком позиций  меню
     Menu menu;
     static final String firstQuery = "SELECT photourl FROM item";
     static final String secondQuery = "SELECT name, description FROM item";
@@ -21,6 +22,7 @@ public class Menu extends Base{
 
     @Override
     protected void settingMenuButton() {
+//        Настройка внешнего вида кнопки "Администратор" на главной панели меню
         super.settingMenuButton();
         menu_but.setBorder(new RoundedBorder(10, Color.decode("#FFFFFF")));
         menu_but.setForeground(Color.WHITE);
@@ -28,6 +30,7 @@ public class Menu extends Base{
     }
     @Override
     protected void settingAdminButton(){
+//        Настройка внешнего вида кнопки "Меню" на главной панели меню
         super.settingAdminButton();
         admin_but.setBackground(Color.decode("#DC143C"));
         admin_but.setBorder(null);
@@ -36,6 +39,7 @@ public class Menu extends Base{
     }
 
     private void setTextForMenu(){
+//        Настройка расположений названия блюда и его описания
         ResultSet rs = getData(secondQuery);
         int x_label = 250;
         int x_description = 400;
@@ -62,6 +66,7 @@ public class Menu extends Base{
     }
     @Override
     public void paintComponent(Graphics g){
+//        Добавление картинок и запуск метода setTextForMenu
         super.paintComponent(g);
         int x_image = 20;
         int y = 120;
@@ -83,8 +88,10 @@ public class Menu extends Base{
         setTextForMenu();
     }
     private class SwitchToAdmin implements ActionListener{
+//        Прослушка нжатия на кнопку "Администратор"
         @Override
         public void actionPerformed(ActionEvent e) {
+//            Переход на страницу Администратора
             menu.setVisible(false);
             frame.getContentPane().removeAll();
             frame.setContentPane(new Login(frame));
