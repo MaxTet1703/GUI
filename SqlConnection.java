@@ -34,6 +34,14 @@ public class SqlConnection {
         }
         return null;
     }
+    public void InsertData(String query) throws SQLException {
+        try{
+            st = getConnection().createStatement();
+            st.executeUpdate(query);
+        } catch (SQLException e){
+            throw new SQLException();
+        }
+    }
 
     public void closeConnection(){
         try{

@@ -23,6 +23,7 @@ abstract class Admin extends Base{
         admin_but.setForeground(Color.WHITE);
         admin_but.setBackground(Color.decode("#DC143C"));
 
+
     }
     @Override
     protected void settingMenuButton(){

@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,21 +9,25 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ChangeMenu extends Admin{
-    String absolutePath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath().concat("media/");
+    String type_image[] = {".jpg", ".jpeg", ".png"};
+    String absolutePath = System.getProperty("user.dir").concat("/media/");
     JLabel label = new JLabel("Добавить позицию");
     JLabel select = new JLabel();
     JTextField name = new JTextField();
     JTextArea description = new JTextArea();
     JButton openPhoto = new JButton("Выбрать изображение");
     JButton submit = new JButton("Сохранить");
-    JLabel wrong = new JLabel("Неверно заполнены данные");
-    static final String firstQuery = "INSERT INTO item VALUES (%d, '%s', '%s', '%s');";
+    JLabel wrong = new JLabel("");
+    static final String firstQuery = "INSERT INTO item VALUES (%s, '%s', '%s', '%s');";
     static final String secondQuery = "SELECT COUNT(*) FROM item";
-    String imagePath;
-    String name_input;
-    String descr;
+    String imagePath = "";
+    String name_input = "";
+    String descr = "";
+    String id = "";
     public ChangeMenu(JFrame frame) {
         super(frame);
         SettingAddForm();
@@ -58,25 +64,70 @@ public class ChangeMenu extends Admin{
         this.add(openPhoto);
         this.add(submit);
         this.add(select);
-        this.add(wrong);
+
+    }
+    private void AddPosition(){
         wrong.setVisible(false);
+        this.remove(wrong);
+
+        name_input = name.getText();
+        descr = description.getText();
+        System.out.println(descr);
+        if (name_input.isEmpty() || descr.isEmpty() || imagePath.isEmpty()){
+            wrong.setText("Заполните всю форму");
+            this.add(wrong);
+            return;
+        }
+        File image = new File(imagePath);
+        boolean is_correct = false;
+        for(String el: type_image){
+            if (image.getName().endsWith(el)){
+                is_correct = true;
+                break;
+            }
+        }
+        if (!is_correct){
+            wrong.setText("Неверный формат фотографии");
+            this.add(wrong);
+            return;
+        }
+
+        image.renameTo(new File(absolutePath, image.getName()));
+        imagePath = "media/".concat(image.getName());
+
+        ResultSet rs = getData(secondQuery);
+        try{
+            rs.next();
+            int count = rs.getInt(1);
+            count ++;
+            id = Integer.toString(count);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        String resultQuery = String.format(firstQuery, id, name_input, descr, imagePath);
+
+       try{
+           SqlConnection connect = new SqlConnection();
+           connect.InsertData(resultQuery);
+           wrong.setForeground(Color.GREEN);
+           this.add(wrong);
+       }catch(SQLException e){
+           wrong.setText("Ошибка сервера");
+           this.add(wrong);
+           return;
+       }
+
+       imagePath = "";
+       name_input = "";
+       imagePath = "";
+       id = "";
+
     }
 
     private class SubmitData implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            name_input = name.getText();
-            descr = description.getText();
-            if (name_input.isEmpty() || descr.isEmpty() || imagePath.isEmpty()){
-                wrong.setVisible(true);
-                return;
-            }
-            File image = new File(imagePath);
-            try {
-                Path temp = Files.move(Paths.get(imagePath), Paths.get(absolutePath.concat(image.getName())));
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            AddPosition();
         }
     }
     private class ChooseImage implements ActionListener {
