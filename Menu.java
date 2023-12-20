@@ -81,17 +81,13 @@ public class Menu extends Base{
             e.printStackTrace();
         }
         setTextForMenu();
-
-
     }
-
     private class SwitchToAdmin implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             menu.setVisible(false);
             frame.getContentPane().removeAll();
-            frame.setContentPane(new Admin(frame));
+            frame.setContentPane(new Login(frame));
             frame.invalidate();
             frame.validate();
 
