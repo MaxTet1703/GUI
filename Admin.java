@@ -1,12 +1,6 @@
-import org.postgresql.gss.GSSOutputStream;
-import org.w3c.dom.ls.LSOutput;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Formatter;
 
 abstract class Admin extends Base{
 //    Абстрактный класс, описывающий компоненты для оболочки администратора

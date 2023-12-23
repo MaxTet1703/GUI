@@ -32,7 +32,6 @@ public class ChangeMenu extends Admin{
         super(frame);
         SettingAddForm();
         addForm();
-        System.out.println(absolutePath);
     }
     private void SettingAddForm(){
         label.setFont(new Font("seri", Font.ITALIC, 22));

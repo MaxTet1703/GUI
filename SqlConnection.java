@@ -8,9 +8,6 @@ public class SqlConnection {
     static final String password = "12345";
     Statement st;
     Connection conn;
-    public SqlConnection(){
-
-    }
     private Connection getConnection(){
 //        Подключение к бд
         conn = null;
